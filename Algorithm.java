@@ -72,6 +72,11 @@ public class Algorithm {
             numSet[i] = numSet[numSet.length - 1 - i];
             numSet[numSet.length - 1 -i] = temp;
         }
+        System.out.println("New Array: ");
+        for (int i : numSet){
+            System.out.print(i);
+        }
+        System.out.println();
     }
     public boolean haveConsecutive(int[] numSet){
         int first = 0;
@@ -96,7 +101,7 @@ public class Algorithm {
     public boolean equivalentValues(int[] numSet){
         for (int i = 0; i < numSet.length;i++){
             int temp = numSet[i];
-            for (int x = i + 1; x < numSet.length;i++){
+            for (int x = i + 1; x < numSet.length;x++){
                 if (numSet[x]==temp){
                     return true;
                 }
@@ -104,18 +109,32 @@ public class Algorithm {
         }
         return false;
     }
-    public int longestStreak(int[] numSet, int target){ // Finish This At Home
+    public int longestStreak(int[] numSet, int target){
         int longStreak = 0;
         int streak = 0;
         for (int i = 0;i<numSet.length;i++){
-            while (numSet[i]== target && numSet[i+1]==target){
+            if (numSet[i] == target){
                 streak++;
+                if (streak > longStreak){
+                    longStreak = streak;
+                }
             }
-        }
+            else{
+                    streak = 0;
+                }
+            }
         return longStreak;
     }
     public String lastAlphabetically(String[] words){
-        String last = "";
+        String last = words[0];
+        for (String str: words){
+            String letterOne = last.substring(0,1);
+            String letterTwo = str.substring(0,1);
+            if (letterOne.compareTo(letterTwo) < 0){
+                last = str;
+            }
+        }
         return last;
     }
 }
+
